@@ -92,7 +92,7 @@ if [[ $run_valgrind == 1 ]] ;
 then
     #use doctored openssl
     export LD_LIBRARY_PATH=/usr/local/ssl/lib
-    ctest -j $(nproc) -D ExperimentalMemCheck -VV
+    ctest --output-on-failure
     export LD_LIBRARY_PATH=
 else
     ctest -C "Debug" --output-on-failure
