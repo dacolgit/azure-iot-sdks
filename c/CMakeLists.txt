@@ -155,11 +155,11 @@ endif()
 
 add_subdirectory(iothub_client)
 add_subdirectory(serializer)
-if(NOT "${build_python}" STREQUAL "OFF")
+if("${build_python}" STREQUAL "ON")
     add_subdirectory(../python/device/iothub_client_python python)
 endif()
 
-if(NOT "${build_javawrapper}" STREQUAL "OFF")	
+if("${build_javawrapper}" STREQUAL "ON")	
      add_subdirectory(../javawrapper/device/iothub_client_javawrapper javawrapper)
 endif()
 

@@ -26,6 +26,7 @@ set build-config=
 set build-platform=Win32
 set CMAKE_use_wsio=OFF
 set CMAKE_build_python=OFF
+set CMAKE_build_javawrapper=OFF
 
 :args-loop
 if "%1" equ "" goto args-done
