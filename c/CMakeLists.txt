@@ -7,10 +7,10 @@ project(azure_iot_sdks)
 #making a nice global variable to know if we are on linux or not.
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     set(LINUX TRUE)
-	#on Linux, enable valgrind
-	#these commands (MEMORYCHECK...) need to apear BEFORE include(CTest) or they will not have any effect
-	find_program(MEMORYCHECK_COMMAND valgrind)	
-	set(MEMORYCHECK_COMMAND_OPTIONS "--trace-children=yes --leak-check=full --error-exitcode=1")
+    #on Linux, enable valgrind
+    #these commands (MEMORYCHECK...) need to apear BEFORE include(CTest) or they will not have any effect
+    find_program(MEMORYCHECK_COMMAND valgrind)	
+    set(MEMORYCHECK_COMMAND_OPTIONS "--trace-children=yes --leak-check=full --error-exitcode=1")
 endif()
 
 include (CTest)
@@ -26,6 +26,7 @@ option(skip_unittests "set skip_unittests to ON to skip unittests (default is OF
 option(compileOption_C "passes a string to the command line of the C compiler" OFF)
 option(compileOption_CXX "passes a string to the command line of the C++ compiler" OFF)
 option(build_python "builds the Python native iothub_client module" OFF)
+option(build_javawrapper "builds the native iothub_client library for java C wrapper" OFF)
 
 
 #Use solution folders. 
@@ -154,8 +155,12 @@ endif()
 
 add_subdirectory(iothub_client)
 add_subdirectory(serializer)
-if("${build_python}" STREQUAL "ON")
+if(NOT "${build_python}" STREQUAL "OFF")
     add_subdirectory(../python/device/iothub_client_python python)
+endif()
+
+if(NOT "${build_javawrapper}" STREQUAL "OFF")	
+     add_subdirectory(../javawrapper/device/iothub_client_javawrapper javawrapper)
 endif()
 
 
