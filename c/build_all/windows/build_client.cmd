@@ -56,11 +56,9 @@ goto args-continue
 :arg-build-python
 set CMAKE_build_python=ON
 goto args-continue
-
 :arg-build-javawrapper
 set CMAKE_build_javawrapper=ON 
 goto args-continue 
-
 
 :args-continue
 shift
@@ -74,7 +72,7 @@ rem -- build with CMAKE
 rem -----------------------------------------------------------------------------
 
 if %CMAKE_use_wsio% == ON (
-    echo WebSockets support only available for x86 platform.
+	echo WebSockets support only available for x86 platform.
 )
 
 echo CMAKE Output Path: %USERPROFILE%\%cmake-output%
@@ -88,22 +86,22 @@ rem no error checking
 pushd %USERPROFILE%\%cmake-output%
 
 if %build-platform% == Win32 (
-    echo ***Running CMAKE for Win32***
-    cmake %build-root% -Duse_wsio:BOOL=%CMAKE_use_wsio% -Dbuild_python:BOOL=%CMAKE_build_python% -Dbuild_javawrapper:BOOL=%CMAKE_build_javawrapper%
-    if not %errorlevel%==0 exit /b %errorlevel%	
+	echo ***Running CMAKE for Win32***
+	cmake %build-root% -Duse_wsio:BOOL=%CMAKE_use_wsio% -Dbuild_python:BOOL=%CMAKE_build_python% -Dbuild_javawrapper:BOOL=%CMAKE_build_javawrapper%
+	if not %errorlevel%==0 exit /b %errorlevel%	
 ) else (
-    echo ***Running CMAKE for Win64***
-    cmake %build-root% -G "Visual Studio 14 Win64"
-    if not %errorlevel%==0 exit /b %errorlevel%	
+	echo ***Running CMAKE for Win64***
+	cmake %build-root% -G "Visual Studio 14 Win64"
+	if not %errorlevel%==0 exit /b %errorlevel%	
 )
 
 if not defined build-config (
-    echo ***Building both configurations***
-    msbuild /m azure_iot_sdks.sln /p:Configuration=Release
-    msbuild /m azure_iot_sdks.sln /p:Configuration=Debug
+	echo ***Building both configurations***
+	msbuild /m azure_iot_sdks.sln /p:Configuration=Release
+	msbuild /m azure_iot_sdks.sln /p:Configuration=Debug
 ) else (
-    echo ***Building %build-config% only***
-    msbuild /m azure_iot_sdks.sln /p:Configuration=%build-config%
+	echo ***Building %build-config% only***
+	msbuild /m azure_iot_sdks.sln /p:Configuration=%build-config%
 )
 
 popd
