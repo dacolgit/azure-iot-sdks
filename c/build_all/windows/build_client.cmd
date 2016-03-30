@@ -56,6 +56,7 @@ goto args-continue
 :arg-build-python
 set CMAKE_build_python=ON
 goto args-continue
+
 :arg-build-javawrapper
 set CMAKE_build_javawrapper=ON 
 goto args-continue 
